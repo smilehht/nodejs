@@ -14,6 +14,9 @@ var app = express();
 // 当用户访问的url以public开始，直接返回__dirname + ‘/public’下的文件
 app.use('/public', express.static(__dirname + '/public'));
 
+// 加载mongoose数据库
+var mongoose = require('mongoose');
+
 // 配置当前模板
 // 定义当前使用的模板引擎
 app.engine('html', swig.renderFile);
@@ -27,13 +30,27 @@ app.set('view engine', 'html');
 swig.setDefaults({cache: false});
 
 // 设置路由
-app.get('/', function (req, res, next) {
+// app.get('/', function (req, res, next) {
 
-    // 读取指定的文件，解析返回给客户端
-    res.render('index');
+//     // 读取指定的文件，解析返回给客户端
+//     res.render('index');
+// });
+
+
+// 根据不同功能划分模块
+app.use('/', require('./routers/mian'));
+app.use('/admin', require('./routers/admin'));
+app.use('/api', require('./routers/api'));
+
+// 链接数据库
+mongoose.connect('mongodb://localhost:27017/blog', function(err) {
+    if (err) {
+        console.log('数据库启动失败');
+    } else {
+        console.log('数据库启动成功');
+        
+        // 监听请求
+        app.listen(8080);
+    }
 });
 
-
-
-// 监听请求
-app.listen(8080);
