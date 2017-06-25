@@ -1,0 +1,24 @@
+{
+    // curly 表示所有的代码块必须使用大括号 
+    'curly': true,
+    // eqeqeq 表示判断相等时，必须使用 ===
+    'eqeqeq': true,
+    // immed 表示立即执行函数必须用括号包起来,(function () { } ())
+    'immed': true,
+    // noarg 表示禁止使用 arguments.caller 和 arguments.callee
+    'noarg': true,
+    // noempty 表示禁止出现空的代码块 { }
+    'noempty': true,
+    // quotmark 是引号的使用规则
+    'quotmark': 'single',
+    // undef 表示所有的局部变量都必须先声明再使用
+    'undef': true,
+    // unused 表示禁止变量已经声明，但却不使用
+    'unused': true,
+    // node 表明你的项目是NodeJS项目，require等node特有的全局函数将通过检查
+    'node': true,
+    'globals': {
+        'require': false,
+        'define': false
+    }
+} 
