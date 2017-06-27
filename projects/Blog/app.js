@@ -1,7 +1,9 @@
-/**
+/*
 *   @file 程序的入口文件
 *   @author huhongtao
 */
+
+'use strict';
 
 // 加载express
 var express = require('express');
@@ -21,7 +23,7 @@ var mongoose = require('mongoose');
 // 定义当前使用的模板引擎
 app.engine('html', swig.renderFile);
 // 设置模板文件存放的目录，第一个必须是views，第二个参数是目录
-app.set('views', './views');
+app.set('views', './resource');
 
 // 注册所使用的模板引擎，第一个参数必须是'view engine'，第二个参数和app.engine的第一个参数相同
 app.set('view engine', 'html');
@@ -38,7 +40,7 @@ swig.setDefaults({cache: false});
 
 
 // 根据不同功能划分模块
-app.use('/', require('./routers/mian'));
+app.use('/', require('./routers/home'));
 app.use('/admin', require('./routers/admin'));
 app.use('/api', require('./routers/api'));
 
@@ -48,7 +50,7 @@ mongoose.connect('mongodb://localhost:27017/blog', function(err) {
         console.log('数据库启动失败');
     } else {
         console.log('数据库启动成功');
-        
+
         // 监听请求
         app.listen(8080);
     }
