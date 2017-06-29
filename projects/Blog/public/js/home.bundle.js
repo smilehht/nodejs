@@ -27500,7 +27500,11 @@ var Header = function (_React$Component) {
             return _react2.default.createElement(
                 'div',
                 null,
-                '111'
+                _react2.default.createElement(
+                    'a',
+                    { href: '../register/#/' },
+                    '\u6CE8\u518C\u9875\u9762'
+                )
             );
         }
     }]);
