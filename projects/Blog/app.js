@@ -18,6 +18,8 @@ app.use('/public', express.static(__dirname + '/public'));
 
 // 加载mongoose数据库
 var mongoose = require('mongoose');
+// 加载body-parse
+var bodyParse = require('body-parser');
 
 // 配置当前模板
 // 定义当前使用的模板引擎
@@ -31,12 +33,8 @@ app.set('view engine', 'html');
 // 取消缓存
 swig.setDefaults({cache: false});
 
-// 设置路由
-// app.get('/', function (req, res, next) {
-
-//     // 读取指定的文件，解析返回给客户端
-//     res.render('index');
-// });
+// 加载body-parser中间件
+app.use(bodyParse.urlencoded({extended: true}));
 
 
 // 根据不同功能划分模块
