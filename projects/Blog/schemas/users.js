@@ -11,7 +11,7 @@ var Users = new Schema({
     // 用户名
     username: String,
     // 密码
-    password: String
+    passward: String
 });
 
 module.exports = Users;
