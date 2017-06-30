@@ -12,7 +12,7 @@ import {Router, Route, hashHistory} from 'react-router';
 class Header extends React.Component {
     render() {
         return <div>
-            111
+            <a href='../register/#/'>注册页面</a>
         </div>;
     }
 }

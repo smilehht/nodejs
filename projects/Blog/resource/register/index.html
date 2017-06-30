@@ -3,8 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
+    <script src='/public/js/jquery-1.12.1.min.js'></script>
 </head>
 <body>
     注册页面
+    <form action="" id="register">
+        <label for="username">用户名：</label>
+        <input type="text" name='username' /><br />
+        <label for="passward">密 码：</label>
+        <input type="passward" name='passward'>
+        <br />
+        <button id='submit'>提交</button>
+    </form>
+<script>
+    $register = $('#register');
+    $('#submit').on('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: '/api/user/register',
+            data: {
+                username: $register.find('[name="username"]').val(),
+                passward: $register.find('[name="passward"]').val()
+            },
+            dataType: 'json',
+            success: function(data) {
+                alert(data.msg);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    });
+</script>
 </body>
 </html>
