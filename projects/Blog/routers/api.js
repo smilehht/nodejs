@@ -32,7 +32,7 @@ router.get('/api', function(req, res, next) {
 });
 
 router.post('/user/register', function(req, res, next) {
-    console.log(req.body);
+    // console.log(req.body);
     var username = req.body.username;
     var passward = req.body.passward;
 
@@ -55,7 +55,6 @@ router.post('/user/register', function(req, res, next) {
     User.findOne({
         username: username
     }).then(function(userInfo) {
-        console.log('userInfo', userInfo);
         // 查到用户
         if (userInfo) {
             responseData.status = 3;
@@ -70,12 +69,12 @@ router.post('/user/register', function(req, res, next) {
             passward: passward
         });
 
-        console.log('user', user);
+        // console.log('user', user);
 
         return user.save();
     }).then(function(newInfo) {
 
-        console.log('newInfo', newInfo);
+        // console.log('newInfo', newInfo);
         // responseData.status = 4;
         responseData.msg = '注册成功';
         res.json(responseData);
@@ -83,6 +82,55 @@ router.post('/user/register', function(req, res, next) {
     });
 
     // res.json(responseData);
+});
+
+router.post('/user/login', function(req, res, next) {
+    // console.log(req.body);
+    var username = req.body.username;
+    var passward = req.body.passward;
+
+    // 判断用户名和密码是否为空
+    if (username === '') {
+        responseData.status = 1;
+        resposenData.msg = '用户名为空';
+        res.json(responseData);
+        return;
+    }
+    if (passward === '') {
+        responseData.status = 2;
+        resposenData.msg = '密码为空';
+        res.json(responseData);
+        return;
+    }
+
+    // 在数据库查找用户名和密码是否匹配
+    User.findOne({
+        username: username,
+        passward: passward
+    }).then(function(userInfo) {
+        if (!userInfo) {
+            responseData.status = 3;
+            responseData.msg = '用户名和密码不匹配';
+            res.json(responseData);
+            return;
+        }
+
+        responseData.msg = '登录成功';
+        req.cookies.set('userInfo', JSON.stringify({
+            _id: userInfo._id,
+            username: userInfo.username
+        }));
+        res.json(responseData);
+        return;
+    });
+});
+
+router.get('/user/logout', function(req, res) {
+    responseData.status = 0;
+    responseData.msg = '退出成功!';
+    req.cookies.set('userInfo', null);
+    res.json(responseData);
+    return;
 });
 
 module.exports = router;
