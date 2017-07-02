@@ -1,0 +1,12 @@
+/**
+* @file header样式
+* @author huhongtao
+*/
+
+.header {
+
+    .item {
+        float: left;
+        padding: 20px;
+    }
+}
