@@ -20,6 +20,8 @@ app.use('/public', express.static(__dirname + '/public'));
 var mongoose = require('mongoose');
 // 加载body-parse
 var bodyParse = require('body-parser');
+// 加载Cookie模块
+var Cookie = require('cookies');
 
 // 配置当前模板
 // 定义当前使用的模板引擎
@@ -35,6 +37,24 @@ swig.setDefaults({cache: false});
 
 // 加载body-parser中间件
 app.use(bodyParse.urlencoded({extended: true}));
+
+// 设置cookie
+app.use(function(req, res, next) {
+    req.cookies = new Cookie(req, res);
+
+
+    // 如果有Cookie信息,将cookie放到useInfo中
+    req.userInfo = {};
+    if (req.cookies.get('userInfo')) {
+        try {
+            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+        } catch (e) {
+            console.log('cookie 解析错误');
+        }
+    }
+    console.log('cookie1',req.cookies.get('userInfo'));
+    next();
+});
 
 
 // 根据不同功能划分模块
