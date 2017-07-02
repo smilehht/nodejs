@@ -5,7 +5,8 @@
 
 'use strict';
 
-let webpack = require('webpack');
+const webpack = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -28,8 +29,8 @@ module.exports = {
                 }
             },
             {
-                test: /\.(css|scss)/,
-                loader: 'style!css!sass'
+                test: /\.(css)/,
+                loader: 'style-loader!css-loader!sass-loader'
             }
         ]
     },
@@ -39,13 +40,14 @@ module.exports = {
         alias: {
 
         }
-    }
+    },
 
-    // plugins: [
-    //     new webpack.optimize.UglifyJsPlugin({
-    //         compress: {
-    //             warning: true
-    //         }
-    //     })
-    // ]
+    plugins: [
+        new ExtractTextPlugin('style.css')
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warning: true
+        //     }
+        // })
+    ]
 };
