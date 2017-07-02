@@ -1,0 +1,13 @@
+/**
+* @file 页面样式重置
+* @author huhongtao
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li {
+    list-style: none;
+}

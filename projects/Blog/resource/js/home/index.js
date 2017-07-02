@@ -9,13 +9,17 @@ import React from 'react';
 import ReactDOM from  'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
 
-class Header extends React.Component {
-    render() {
-        return <div>
-            <a href='../register/#/'>注册页面</a>
-        </div>;
-    }
-}
+import Header from './components/header.js';
+
+import '../css/header.css';
+
+// class Header extends React.Component {
+//     render() {
+//         return <div>
+//             <a href='../register/#/'>注册页面</a>
+//         </div>;
+//     }
+// }
 
 class Body extends React.Component {
     render() {
