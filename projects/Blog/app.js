@@ -23,6 +23,9 @@ var bodyParse = require('body-parser');
 // 加载Cookie模块
 var Cookie = require('cookies');
 
+// 加载User
+var User = require('./models/user.js');
+
 // 配置当前模板
 // 定义当前使用的模板引擎
 app.engine('html', swig.renderFile);
@@ -48,11 +51,21 @@ app.use(function(req, res, next) {
     if (req.cookies.get('userInfo')) {
         try {
             req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+            // 获取当前登录的用户是否为管理员
+            // console.log('req.userInfo._id', req.userInfo._id);
+            User.findById(req.userInfo._id).then(function(userInfo) {
+                console.log('userinfo', userInfo);
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                console.log('req.userInfo.isAdmin', req.userInfo.isAdmin);
+                console.log('userinfo', userInfo);
+                // next();
+            });
         } catch (e) {
             console.log('cookie 解析错误');
+            // next();
         }
     }
-    console.log('cookie1',req.cookies.get('userInfo'));
+    // console.log('cookie1',req.cookies.get('userInfo'));
     next();
 });
 
