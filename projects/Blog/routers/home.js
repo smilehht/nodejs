@@ -16,7 +16,7 @@ router.get('/register', function(req, res) {
     res.render('js/register');
 });
 router.get('/login', function(req, res) {
-    console.log({userInfo: req.userInfo});
+    // console.log({userInfo: req.userInfo});
     res.render('js/login', {userInfo: req.userInfo});
 });
 
