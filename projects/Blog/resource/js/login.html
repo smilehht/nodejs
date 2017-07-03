@@ -8,6 +8,11 @@
 <body>
 登录
 {% if userInfo._id %}
+    {% if userInfo.isAdmin %}
+    你好,管理员!<a href="/admin">后台管理</a>
+    {% else %}
+    <span>非管理员</span>
+    {% endif %}
 <a id='logout' style="">退出</a>
 {% else %}
 <form action="" id="login">
@@ -19,6 +24,8 @@
     <button id='submit'>提交</button>
 </form>
 {% endif %}
+
+
 <script>
 
     // 提交注册
