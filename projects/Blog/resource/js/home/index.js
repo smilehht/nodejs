@@ -11,7 +11,7 @@ import {Router, Route, hashHistory} from 'react-router';
 
 import Header from './components/header.js';
 
-import '../css/header.css';
+import '../../css/header.css';
 
 // class Header extends React.Component {
 //     render() {
