@@ -3,14 +3,15 @@
 *   @author huhongtao
 */
 
-'use strict';
-
 const webpack = require('webpack');
+var path = require('path');
+const node_module_path = path.resolve(__dirname, 'node_modules');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
-        home: __dirname + '/resource/home/index.js'
+        home: __dirname + '/resource/js/home/index.js',
+        main: __dirname + '/webpages/router.js',
     },
 
     output: {
@@ -38,8 +39,18 @@ module.exports = {
     resolve: {
         extensions: ['.', '.js'],
         alias: {
-
+            'react': path.join(node_module_path, 'react'),
+            'antd': path.join(node_module_path, 'antd')
         }
+    },
+
+    externals: {
+
+        'react': 'window.React',
+        'react-dom': 'window.ReactDOM',
+        'react-router': 'window.ReactRouter',
+        'antd': 'window.Antd',
+        'echarts': 'window.echarts'
     },
 
     plugins: [
