@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run watch-css & npm run watch-js",
+    "watch-css": "sass --watch webpage/css/app.scss : public/css/app.scss",
+    "watch-js": "webpack"
   },
   "author": "",
   "license": "ISC",
