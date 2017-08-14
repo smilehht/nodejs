@@ -44,14 +44,14 @@ module.exports = {
         }
     },
 
-    externals: {
+    // externals: {
 
-        'react': 'window.React',
-        'react-dom': 'window.ReactDOM',
-        'react-router': 'window.ReactRouter',
-        'antd': 'window.Antd',
-        'echarts': 'window.echarts'
-    },
+    //     'react': 'window.React',
+    //     'react-dom': 'window.ReactDOM',
+    //     'react-router': 'window.ReactRouter',
+    //     'antd': 'window.Antd',
+    //     'echarts': 'window.echarts'
+    // },
 
     plugins: [
         new ExtractTextPlugin('style.css')
